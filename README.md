@@ -1,2 +1,6 @@
 # MATH_685
-Stuff for MATH 685
+Making a story with the gapminder data:
+
+
+plot(pop ~ continent, gapminder)
+
