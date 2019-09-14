@@ -1,0 +1,44 @@
+---
+title: "MATH_685"
+author: "Kathleen Johnson"
+date: "9/14/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(gapminder)
+```
+
+
+Making a story with the gapminder data:
+
+```{r}
+hist(gapminder$gdpPercap)
+```
+
+This is a histogram showing the gross domestic product (GDP) per capita.
+
+```{r}
+(summary(gapminder$gdpPercap))
+```
+
+```{r}
+library(tidyverse)
+```
+
+
+```{r}
+p <- ggplot(filter(gapminder, continent != "Oceania"),
+            aes(x = pop, y = lifeExp))
+```
+
+```{r}
+p<- p + scale_x_log10()
+p+geom_point()
+```
+
+I don't think this shows anything super inmportant. I was mainly playing around with making these plots. 
