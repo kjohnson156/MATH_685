@@ -1,0 +1,83 @@
+---
+title: "Ch 7_Answers"
+author: "Kathleen Johnson"
+date: "9/16/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+
+```
+```{r}
+data("diamonds")
+```
+```{r}
+str(diamonds)
+```
+
+Explore the distribution of each of the x, y, and z variables in diamonds. What do you learn? Think about a diamond and how you might decide which dimension is the length, width, and depth.
+
+```{r}
+ggplot(diamonds) + 
+  geom_histogram(mapping = aes(x = y), binwidth = 0.5)+
+  coord_cartesian(ylim = c(0, 50))
+
+```
+
+```{r}
+ggplot(diamonds) + 
+  geom_histogram(mapping = aes(x = x))+
+  coord_cartesian(ylim = c(0,1000))
+```
+```{r}
+summary(diamonds$x)
+```
+
+```{r}
+str(diamonds$z)
+```
+```{r}
+summary(diamonds$z)
+```
+
+```{r}
+ggplot(diamonds) + 
+  geom_histogram(mapping = aes(x = z))+
+  coord_cartesian(xlim = c(1,8))
+```
+
+Explore the distribution of price. Do you discover anything unusual or surprising?
+
+```{r}
+summary(diamonds$price)
+
+```
+
+```{r}
+ggplot(diamonds) + 
+  geom_histogram(mapping = aes(x = price))
+```
+
+There are more priced on the lower side as opposed to higher which may be an indicator of customer base. What I mean by that is, are more of the individuals buying diamonds only able to afford the lower cost ones?
+
+```{r}
+str(diamonds$carat)
+```
+
+```{r}
+ggplot(diamonds) + 
+  geom_histogram(mapping = aes(x = carat))
+```
+
+```{r}
+count(diamonds, vars= carat, wt_var=.99)
+```
+
+How many diamonds are 0.99 carat? How many are 1 carat? What do you think is the cause of the difference? (I don't think I did this right)
+
+
