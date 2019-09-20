@@ -75,9 +75,75 @@ ggplot(diamonds) +
 ```
 
 ```{r}
-count(diamonds, vars= carat, wt_var=.99)
+count(diamonds, carat)
 ```
 
 How many diamonds are 0.99 carat? How many are 1 carat? What do you think is the cause of the difference? (I don't think I did this right)
 
+```{r}
+ggplot(diamonds) + 
+  geom_histogram(mapping = aes(x = y), binwidth = 0.5) +
+  coord_cartesian(ylim = c(0, 50))
+```
+
+Compare and contrast coord_cartesian() vs xlim() or ylim() when zooming in on a histogram. What happens if you leave binwidth unset? What happens if you try and zoom so only half a bar shows?
+
+```{r}
+ggplot(diamonds) + 
+  geom_histogram(mapping = aes(x = y)) +
+  coord_cartesian(xlim = c(0, 20))
+```
+
+What happens if you try and zoom so only half a bar shows? - not sure how to do this. 
+
+```{r}
+diamonds2 <- diamonds %>% 
+  mutate(y = ifelse(y < 3 | y > 20, NA, y))
+```
+
+```{r}
+ggplot(data = diamonds2, mapping = aes(x = x, y = y)) + 
+  geom_point(na.rm = TRUE)
+```
+
+What happens to missing values in a histogram? What happens to missing values in a bar chart? Why is there a difference?
+```{r}
+ggplot(diamonds) + 
+  geom_histogram(mapping = aes(x = y))
+```
+```{r}
+ggplot(diamonds2) + 
+  geom_histogram(mapping = aes(x = y))
+```
+The histogram was "zoomed" in to just looking at y(0,11) 
+
+```{r}
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut))
+```
+```{r}
+ggplot(data = diamonds2) +
+  geom_bar(mapping = aes(x = cut))
+```
+I don't see a difference with the bar chart, but there may not be missing data in the variable cut?
+
+What does na.rm = TRUE do in mean() and sum()?
+
+```{r}
+mean(diamonds$carat)
+```
+
+```{r}
+mean(diamonds$carat)+(na.rm = TRUE)
+```
+
+Why are the numbers different when doing na.rm = TRUE?
+
+```{r}
+sum(diamonds$carat)
+```
+
+```{r}
+sum(diamonds$carat)+(na.rm = TRUE)
+```
 
